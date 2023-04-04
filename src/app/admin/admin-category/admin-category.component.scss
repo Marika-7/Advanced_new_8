@@ -1,0 +1,14 @@
+@import '../../shared/styles/fonts';
+@import '../../shared/styles/mixins';
+@import '../../shared/styles/variables';
+@import '../../shared/styles/admin';
+
+.add {
+    &__block {
+        grid-template-rows: 50px 50px;
+    }
+    &__file {
+        grid-row: 2 / 3;
+        grid-column: 1 / 3;
+    }
+}

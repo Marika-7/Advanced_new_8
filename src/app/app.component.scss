@@ -1,0 +1,22 @@
+@import './shared/styles/fonts';
+@import './shared/styles/variables';
+@import './shared/styles/mixins';
+
+.main {
+    width: 100%;
+    min-height: calc(100vh - 180px);
+    padding-top: 110px;
+    background-color: transparent;
+    font-family: 'RotondaC', sans-serif;
+    font-weight: normal;
+    @include screen-1600 {
+        padding-top: 95px;
+    }
+    @include screen-1400 {
+        min-height: calc(100vh - 150px);
+    }
+    @include screen-1200 {
+        min-height: calc(100vh - (150px + 60px));
+        padding-top: 60px;
+    }
+}

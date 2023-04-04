@@ -1,0 +1,102 @@
+<div class="section-admin">
+
+    <button class="btn btn-white" 
+        (click)="openInputs()">
+        <span *ngIf="!editStatus">Додати акцію</span>
+        <span *ngIf="editStatus">Редагувати</span>
+    </button>
+
+    <div class="add" 
+        *ngIf="inputsIsOpen">
+        <form 
+            [formGroup]="discountForm" 
+            (ngSubmit)="saveDiscount()">
+            <div class="add__block">
+
+                <input type="text" placeholder="*Назва" 
+                    class="add__input" 
+                    formControlName="name">
+                <input type="text" placeholder="*Заголовок" 
+                    class="add__input" 
+                    formControlName="header">
+                <textarea placeholder="*Опис" 
+                    class="add__input add__area" 
+                    formControlName="description"></textarea>
+                
+                <ng-container *ngIf="!isUploaded">
+                    <input type="file" 
+                        class="add__input add__file" 
+                        (change)="upload($event)">
+                    <progress [value]="uploadPercent" max="100" 
+                        class="add__progress"></progress>
+                </ng-container>
+
+                <ng-container *ngIf="isUploaded">
+                    <div class="add__img-block">
+                            <img [src]="valueByControl('imagePath')" alt="valueByControl('name')" 
+                            class="add__img">
+                        <button class="add__img-del line" 
+                            type="button" 
+                            (click)="deleteImage()">
+                            Видалити
+                        </button>
+                    </div>
+                </ng-container>
+                
+                <button class="add__btn btn btn-blue" 
+                    type="submit" 
+                    [disabled]="discountForm.invalid">
+                    Зберегти
+                </button>
+                
+            </div>
+        </form>
+    </div>
+
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th class="table__th">Дата</th>
+                <th class="table__th">Назва</th>
+                <th class="table__th">Заголовок</th>
+                <th class="table__th">Опис</th>
+                <th class="table__th">Картинка</th>
+                <th class="table__th">Дії</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let discount of adminDiscounts">
+                <td class="table__td">{{ discount.id }}</td>
+                <td class="table__td">{{ discount.name }}</td>
+                <td class="table__td">{{ discount.header }}</td>
+                <td class="table__td">
+                    {{ discount.description | slice:0:60 }}
+                    <span *ngIf="discount.description.length > 60">...</span>
+                </td>
+                <td class="table__td">
+                    <img [src]="discount.imagePath" 
+                        alt="discount.name" 
+                        class="table__img">
+                </td>
+
+                <td class="table__td">
+                    <span class="table__for-btn">
+                        <button class="table__btn line" 
+                            (click)="editDiscount(discount)">
+                            Редагувати
+                        </button>
+                        <button class="table__btn line" 
+                            [disabled]="editStatus" 
+                            (click)="deleteDiscount(discount)">
+                            Видалити
+                        </button>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>

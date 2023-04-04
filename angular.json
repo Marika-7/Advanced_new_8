@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "task08": {
+    "monosushi": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/task08",
+            "outputPath": "docs",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -44,8 +44,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "10kb",
+                  "maximumError": "12kb"
                 }
               ],
               "outputHashing": "all"
@@ -56,7 +56,13 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -65,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "task08:build:production"
+              "browserTarget": "monosushi:build:production"
             },
             "development": {
-              "browserTarget": "task08:build:development"
+              "browserTarget": "monosushi:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "task08:build"
+            "browserTarget": "monosushi:build"
           }
         },
         "test": {
@@ -100,5 +106,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "fbecb91f-f2bd-447a-b674-f305c7c96133"
   }
 }
